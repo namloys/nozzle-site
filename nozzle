@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nozzle Information</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 80%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Nozzle Information Summary</h1>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Size Range (mm)</th>
+            <th>Standard Shot Life</th>
+        </tr>
+        <tr>
+            <td>Standard Round</td>
+            <td>0.3 – 2.0</td>
+            <td>~3–5 million shots</td>
+        </tr>
+        <tr>
+            <td>Chip Nozzle</td>
+            <td>0.1 – 1.0</td>
+            <td>~2–3 million shots</td>
+        </tr>
+        <tr>
+            <td>Special Shape</td>
+            <td>Custom</td>
+            <td>~1–2 million shots</td>
+        </tr>
+        <tr>
+            <td>Vacuum Nozzle</td>
+            <td>0.5 – 3.0</td>
+            <td>~3 million shots</td>
+        </tr>
+    </table>
+</body>
+</html>
