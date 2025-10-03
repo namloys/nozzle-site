@@ -1,43 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Nozzle Information</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 80%; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f4f4f4; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เว็บตัวอย่างพร้อม Sidebar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: #2c3e50;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #34495e;
+      margin: 0;
+    }
+
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      border-bottom: 1px solid #34495e;
+      cursor: pointer;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #34495e;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <h1>Nozzle Information Summary</h1>
-    <table>
-        <tr>
-            <th>Type</th>
-            <th>Size Range (mm)</th>
-            <th>Standard Shot Life</th>
-        </tr>
-        <tr>
-            <td>Standard Round</td>
-            <td>0.3 – 2.0</td>
-            <td>~3–5 million shots</td>
-        </tr>
-        <tr>
-            <td>Chip Nozzle</td>
-            <td>0.1 – 1.0</td>
-            <td>~2–3 million shots</td>
-        </tr>
-        <tr>
-            <td>Special Shape</td>
-            <td>Custom</td>
-            <td>~1–2 million shots</td>
-        </tr>
-        <tr>
-            <td>Vacuum Nozzle</td>
-            <td>0.5 – 3.0</td>
-            <td>~3 million shots</td>
-        </tr>
-    </table>
+
+  <div class="sidebar">
+    <h2>เมนู</h2>
+    <a class="active" onclick="showSection('home')">หน้าหลัก</a>
+    <a onclick="showSection('about')">เกี่ยวกับ</a>
+    <a onclick="showSection('contact')">ติดต่อ</a>
+  </div>
+
+  <div class="main-content">
+    <div id="home" class="content-section active">
+      <h1>หน้าหลัก</h1>
+      <p>นี่คือเนื้อหาของหน้าหลัก</p>
+    </div>
+    <div id="about" class="content-section">
+      <h1>เกี่ยวกับ</h1>
+      <p>นี่คือเนื้อหาของหน้าข้อมูลเกี่ยวกับเรา</p>
+    </div>
+    <div id="contact" class="content-section">
+      <h1>ติดต่อ</h1>
+      <p>นี่คือเนื้อหาของหน้าติดต่อเรา</p>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      // ซ่อนทุก section
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // แสดง section ที่เลือก
+      document.getElementById(id).classList.add('active');
+
+      // อัปเดต active menu
+      const links = document.querySelectorAll('.sidebar a');
+      links.forEach(link => link.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+
 </body>
 </html>
