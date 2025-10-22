@@ -1,100 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เว็บตัวอย่างพร้อม Sidebar</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <title>Nozzle Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* Sidebar */
-    .sidebar {
-      width: 200px;
-      background-color: #2c3e50;
-      color: white;
-      display: flex;
-      flex-direction: column;
-    }
+        /* 🔹 ส่วนแถบเมนู */
+        .navbar {
+            background-color: #004d99;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
 
-    .sidebar h2 {
-      text-align: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #34495e;
-      margin: 0;
-    }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .sidebar a {
-      padding: 15px 20px;
-      text-decoration: none;
-      color: white;
-      border-bottom: 1px solid #34495e;
-      cursor: pointer;
-    }
+        .navbar a:hover {
+            background-color: #0066cc;
+        }
 
-    .sidebar a:hover, .sidebar a.active {
-      background-color: #34495e;
-    }
+        /* 🔹 เนื้อหาหลัก */
+        .content {
+            padding: 20px;
+        }
 
-    /* Main content */
-    .main-content {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
 
-    .content-section {
-      display: none;
-    }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
 
-    .content-section.active {
-      display: block;
-    }
-  </style>
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #004d99;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2>เมนู</h2>
-    <a class="active" onclick="showSection('home')">หน้าหลัก</a>
-    <a onclick="showSection('about')">เกี่ยวกับ</a>
-    <a onclick="showSection('contact')">ติดต่อ</a>
-  </div>
-
-  <div class="main-content">
-    <div id="home" class="content-section active">
-      <h1>หน้าหลัก</h1>
-      <p>นี่คือเนื้อหาของหน้าหลัก</p>
+    <!-- 🔹 แถบเมนูแนวนอน -->
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Nozzle Types</a>
+        <a href="#">Maintenance</a>
+        <a href="#">Contact</a>
     </div>
-    <div id="about" class="content-section">
-      <h1>เกี่ยวกับ</h1>
-      <p>นี่คือเนื้อหาของหน้าข้อมูลเกี่ยวกับเรา</p>
+
+    <!-- 🔹 เนื้อหา -->
+    <div class="content">
+        <h1>Nozzle Information Summary</h1>
+
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Size Range (mm)</th>
+                <th>Standard Shot Life</th>
+            </tr>
+            <tr>
+                <td>Standard Round</td>
+                <td>0.3 – 2.0</td>
+                <td>~3–5 million shots</td>
+            </tr>
+            <tr>
+                <td>Chip Nozzle</td>
+                <td>0.1 – 1.0</td>
+                <td>~2–3 million shots</td>
+            </tr>
+            <tr>
+                <td>Special Shape</td>
+                <td>Custom</td>
+                <td>~1–2 million shots</td>
+            </tr>
+            <tr>
+                <td>Vacuum Nozzle</td>
+                <td>0.5 – 3.0</td>
+                <td>~3 million shots</td>
+            </tr>
+        </table>
     </div>
-    <div id="contact" class="content-section">
-      <h1>ติดต่อ</h1>
-      <p>นี่คือเนื้อหาของหน้าติดต่อเรา</p>
-    </div>
-  </div>
-
-  <script>
-    function showSection(id) {
-      // ซ่อนทุก section
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // แสดง section ที่เลือก
-      document.getElementById(id).classList.add('active');
-
-      // อัปเดต active menu
-      const links = document.querySelectorAll('.sidebar a');
-      links.forEach(link => link.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-  </script>
 
 </body>
 </html>
