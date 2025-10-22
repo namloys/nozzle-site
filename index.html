@@ -6,19 +6,21 @@
   <title>Nozzle Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-blue-100 min-h-screen flex items-center justify-center">
+<body class="bg-blue-100 min-h-screen">
 
   <!-- 🔐 Login Page -->
-  <div id="loginBox" class="bg-white shadow-lg rounded-xl p-8 w-80">
-    <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">🔐 Nozzle System Login</h2>
-    <input id="username" type="text" placeholder="Username" class="w-full border p-2 rounded mb-3" />
-    <input id="password" type="password" placeholder="Password" class="w-full border p-2 rounded mb-4" />
-    <button onclick="login()" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 transition">Login</button>
-    <p id="error" class="text-red-500 text-sm mt-2 text-center hidden">Invalid username or password</p>
+  <div id="loginBox" class="flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-xl p-8 w-80">
+      <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">🔐 Nozzle System Login</h2>
+      <input id="username" type="text" placeholder="Username" class="w-full border p-2 rounded mb-3" />
+      <input id="password" type="password" placeholder="Password" class="w-full border p-2 rounded mb-4" />
+      <button onclick="login()" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 transition">Login</button>
+      <p id="error" class="text-red-500 text-sm mt-2 text-center hidden">Invalid username or password</p>
+    </div>
   </div>
 
   <!-- 🌐 Main Dashboard -->
-  <div id="mainContent" class="hidden w-full">
+  <div id="mainContent" class="hidden w-full pt-6">
 
     <!-- Header -->
     <header class="bg-blue-600 text-white shadow-md">
@@ -43,7 +45,7 @@
     </header>
 
     <!-- Content -->
-    <main class="max-w-7xl mx-auto mt-10 px-4">
+    <main class="max-w-7xl mx-auto mt-6 px-4">
 
       <!-- Section: Nozzle List -->
       <section id="list" class="content-section bg-white p-6 rounded-xl shadow">
@@ -52,63 +54,4 @@
       </section>
 
       <!-- Section: Nozzle Spare -->
-      <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🔧 Nozzle Spare</h2>
-        <p class="text-gray-600">ข้อมูลหัว Nozzle สำรองในคลัง</p>
-      </section>
-
-      <!-- Section: Nozzle PM -->
-      <section id="pm" class="content-section bg-white p-6 rounded-xl shadow hidden">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🧰 Nozzle PM</h2>
-        <p class="text-gray-600">ตารางการบำรุงรักษา (Preventive Maintenance) ของ Nozzle</p>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    const USER = "admin";
-    const PASS = "1234";
-
-    // ✅ เข้าสู่ระบบ
-    function login() {
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
-      if (u === USER && p === PASS) {
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("username", u);
-        showDashboard();
-      } else {
-        document.getElementById("error").classList.remove("hidden");
-      }
-    }
-
-    // 🚪 ออกจากระบบ
-    function logout() {
-      localStorage.removeItem("loggedIn");
-      localStorage.removeItem("username");
-      location.reload();
-    }
-
-    // 🧭 แสดงเฉพาะ Section ที่เลือก
-    function showSection(id) {
-      document.querySelectorAll(".content-section").forEach(s => s.classList.add("hidden"));
-      document.getElementById(id).classList.remove("hidden");
-    }
-
-    // 🌐 แสดงหน้า Dashboard หลังล็อกอิน
-    function showDashboard() {
-      document.getElementById("loginBox").classList.add("hidden");
-      document.getElementById("mainContent").classList.remove("hidden");
-      document.getElementById("displayUser").innerText = "👤 " + (localStorage.getItem("username") || "");
-    }
-
-    // 🧠 ตรวจสอบสถานะล็อกอิน
-    if (localStorage.getItem("loggedIn") === "true") {
-      showDashboard();
-    }
-  </script>
-
-</body>
-</html>
+      <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden
