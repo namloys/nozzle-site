@@ -49,9 +49,17 @@
 
       <!-- Section: Nozzle List -->
       <section id="list" class="content-section bg-white p-6 rounded-xl shadow">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">📋 Nozzle List</h2>
-        <p class="text-gray-600">แสดงรายการหัว Nozzle ทั้งหมดในระบบ</p>
-      </section>
+  <h2 class="text-2xl font-semibold mb-4 text-blue-700">📋 Nozzle List</h2>
+  <p class="text-gray-600 mb-4">แสดงรายการหัว Nozzle ทั้งหมดในระบบ</p>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto border border-gray-200">
+      ...
+      <!-- ตัวอย่างข้อมูล 5 แถว -->
+      ...
+    </table>
+  </div>
+</section>
 
       <!-- Section: Nozzle Spare -->
       <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
