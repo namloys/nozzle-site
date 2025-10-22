@@ -1,104 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Nozzle Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 🔹 ส่วนแถบเมนู */
-        .navbar {
-            background-color: #004d99;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-        }
-
-        .navbar a {
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .navbar a:hover {
-            background-color: #0066cc;
-        }
-
-        /* 🔹 เนื้อหาหลัก */
-        .content {
-            padding: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        h1 {
-            text-align: center;
-            color: #004d99;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nozzle Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen">
 
-    <!-- 🔹 แถบเมนูแนวนอน -->
-    <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Nozzle Types</a>
-        <a href="#">Maintenance</a>
-        <a href="#">Contact</a>
+  <!-- Header -->
+  <header class="bg-blue-600 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <h1 class="text-3xl font-bold">Nozzle</h1>
     </div>
+    
+    <!-- Top Menu -->
+    <nav class="bg-blue-500">
+      <div class="max-w-7xl mx-auto px-4">
+        <ul class="flex space-x-6 py-3 text-white font-medium">
+          <li><button onclick="showSection('list')" class="hover:text-yellow-300">Nozzle List</button></li>
+          <li><button onclick="showSection('spare')" class="hover:text-yellow-300">Nozzle Spare</button></li>
+          <li><button onclick="showSection('pm')" class="hover:text-yellow-300">Nozzle PM</button></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <!-- 🔹 เนื้อหา -->
-    <div class="content">
-        <h1>Nozzle Information Summary</h1>
+  <!-- Content -->
+  <main class="max-w-7xl mx-auto mt-10 px-4">
 
-        <table>
-            <tr>
-                <th>Type</th>
-                <th>Size Range (mm)</th>
-                <th>Standard Shot Life</th>
-            </tr>
-            <tr>
-                <td>Standard Round</td>
-                <td>0.3 – 2.0</td>
-                <td>~3–5 million shots</td>
-            </tr>
-            <tr>
-                <td>Chip Nozzle</td>
-                <td>0.1 – 1.0</td>
-                <td>~2–3 million shots</td>
-            </tr>
-            <tr>
-                <td>Special Shape</td>
-                <td>Custom</td>
-                <td>~1–2 million shots</td>
-            </tr>
-            <tr>
-                <td>Vacuum Nozzle</td>
-                <td>0.5 – 3.0</td>
-                <td>~3 million shots</td>
-            </tr>
-        </table>
-    </div>
+    <!-- Section: Nozzle List -->
+    <section id="list" class="content-section bg-white p-6 rounded-xl shadow">
+      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle List</h2>
+      <p class="text-gray-600">แสดงรายการหัว Nozzle ทั้งหมดในระบบ</p>
+    </section>
+
+    <!-- Section: Nozzle Spare -->
+    <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
+      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle Spare</h2>
+      <p class="text-gray-600">ข้อมูลหัว Nozzle สำรองในคลัง</p>
+    </section>
+
+    <!-- Section: Nozzle PM -->
+    <section id="pm" class="content-section bg-white p-6 rounded-xl shadow hidden">
+      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle PM</h2>
+      <p class="text-gray-600">ตารางการบำรุงรักษา (Preventive Maintenance) ของ Nozzle</p>
+    </section>
+
+  </main>
+
+  <script>
+    function showSection(sectionId) {
+      // ซ่อนทุก section ก่อน
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+      // แสดงเฉพาะ section ที่เลือก
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+  </script>
 
 </body>
 </html>
