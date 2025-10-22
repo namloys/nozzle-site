@@ -1,61 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nozzle Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-blue-100 min-h-screen flex items-center justify-center">
 
-  <!-- Header -->
-  <header class="bg-blue-600 text-white shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 py-4">
-      <h1 class="text-3xl font-bold">Nozzle</h1>
-    </div>
-    
-    <!-- Top Menu -->
-    <nav class="bg-blue-500">
-      <div class="max-w-7xl mx-auto px-4">
-        <ul class="flex space-x-6 py-3 text-white font-medium">
-          <li><button onclick="showSection('list')" class="hover:text-yellow-300">Nozzle List</button></li>
-          <li><button onclick="showSection('spare')" class="hover:text-yellow-300">Nozzle Spare</button></li>
-          <li><button onclick="showSection('pm')" class="hover:text-yellow-300">Nozzle PM</button></li>
-        </ul>
+  <!-- 🔐 Login Page -->
+  <div id="loginBox" class="bg-white shadow-lg rounded-xl p-8 w-80">
+    <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">🔐 Nozzle System Login</h2>
+    <input id="username" type="text" placeholder="Username" class="w-full border p-2 rounded mb-3" />
+    <input id="password" type="password" placeholder="Password" class="w-full border p-2 rounded mb-4" />
+    <button onclick="login()" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 transition">Login</button>
+    <p id="error" class="text-red-500 text-sm mt-2 text-center hidden">Invalid username or password</p>
+  </div>
+
+  <!-- 🌐 Main Dashboard -->
+  <div id="mainContent" class="hidden w-full">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Nozzle</h1>
+        <div class="flex items-center space-x-3">
+          <p id="displayUser" class="italic opacity-90"></p>
+          <button onclick="logout()" class="bg-red-500 px-3 py-1 rounded hover:bg-red-400">Logout</button>
+        </div>
       </div>
-    </nav>
-  </header>
 
-  <!-- Content -->
-  <main class="max-w-7xl mx-auto mt-10 px-4">
+      <!-- Top Menu -->
+      <nav class="bg-blue-500">
+        <div class="max-w-7xl mx-auto px-4">
+          <ul class="flex space-x-6 py-3 text-white font-medium">
+            <li><button onclick="showSection('list')" class="hover:text-yellow-300">Nozzle List</button></li>
+            <li><button onclick="showSection('spare')" class="hover:text-yellow-300">Nozzle Spare</button></li>
+            <li><button onclick="showSection('pm')" class="hover:text-yellow-300">Nozzle PM</button></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-    <!-- Section: Nozzle List -->
-    <section id="list" class="content-section bg-white p-6 rounded-xl shadow">
-      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle List</h2>
-      <p class="text-gray-600">แสดงรายการหัว Nozzle ทั้งหมดในระบบ</p>
-    </section>
+    <!-- Content -->
+    <main class="max-w-7xl mx-auto mt-10 px-4">
 
-    <!-- Section: Nozzle Spare -->
-    <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
-      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle Spare</h2>
-      <p class="text-gray-600">ข้อมูลหัว Nozzle สำรองในคลัง</p>
-    </section>
+      <!-- Section: Nozzle List -->
+      <section id="list" class="content-section bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">📋 Nozzle List</h2>
+        <p class="text-gray-600">แสดงรายการหัว Nozzle ทั้งหมดในระบบ</p>
+      </section>
 
-    <!-- Section: Nozzle PM -->
-    <section id="pm" class="content-section bg-white p-6 rounded-xl shadow hidden">
-      <h2 class="text-2xl font-semibold mb-4 text-blue-700">Nozzle PM</h2>
-      <p class="text-gray-600">ตารางการบำรุงรักษา (Preventive Maintenance) ของ Nozzle</p>
-    </section>
+      <!-- Section: Nozzle Spare -->
+      <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🔧 Nozzle Spare</h2>
+        <p class="text-gray-600">ข้อมูลหัว Nozzle สำรองในคลัง</p>
+      </section>
 
-  </main>
+      <!-- Section: Nozzle PM -->
+      <section id="pm" class="content-section bg-white p-6 rounded-xl shadow hidden">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🧰 Nozzle PM</h2>
+        <p class="text-gray-600">ตารางการบำรุงรักษา (Preventive Maintenance) ของ Nozzle</p>
+      </section>
 
+    </main>
+  </div>
+
+  <!-- JavaScript -->
   <script>
-    function showSection(sectionId) {
-      // ซ่อนทุก section ก่อน
-      document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
-      // แสดงเฉพาะ section ที่เลือก
-      document.getElementById(sectionId).classList.remove('hidden');
+    const USER = "admin";
+    const PASS = "1234";
+
+    // ✅ เข้าสู่ระบบ
+    function login() {
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
+      if (u === USER && p === PASS) {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("username", u);
+        showDashboard();
+      } else {
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+
+    // 🚪 ออกจากระบบ
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("username");
+      location.reload();
+    }
+
+    // 🧭 แสดงเฉพาะ Section ที่เลือก
+    function showSection(id) {
+      document.querySelectorAll(".content-section").forEach(s => s.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    // 🌐 แสดงหน้า Dashboard หลังล็อกอิน
+    function showDashboard() {
+      document.getElementById("loginBox").classList.add("hidden");
+      document.getElementById("mainContent").classList.remove("hidden");
+      document.getElementById("displayUser").innerText = "👤 " + (localStorage.getItem("username") || "");
+    }
+
+    // 🧠 ตรวจสอบสถานะล็อกอิน
+    if (localStorage.getItem("loggedIn") === "true") {
+      showDashboard();
     }
   </script>
 
