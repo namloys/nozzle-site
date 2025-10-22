@@ -20,7 +20,7 @@
   </div>
 
   <!-- 🌐 Main Dashboard -->
-  <div id="mainContent" class="hidden w-full pt-6">
+  <div id="mainContent" class="hidden w-full">
 
     <!-- Header -->
     <header class="bg-blue-600 text-white shadow-md">
@@ -54,4 +54,67 @@
       </section>
 
       <!-- Section: Nozzle Spare -->
-      <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden
+      <section id="spare" class="content-section bg-white p-6 rounded-xl shadow hidden">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🔧 Nozzle Spare</h2>
+        <p class="text-gray-600">ข้อมูลหัว Nozzle สำรองในคลัง</p>
+      </section>
+
+      <!-- Section: Nozzle PM -->
+      <section id="pm" class="content-section bg-white p-6 rounded-xl shadow hidden">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">🧰 Nozzle PM</h2>
+        <p class="text-gray-600">ตารางการบำรุงรักษา (Preventive Maintenance) ของ Nozzle</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const USER = "admin";
+    const PASS = "1234";
+
+    // ✅ เข้าสู่ระบบ
+    function login() {
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
+      if (u === USER && p === PASS) {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("username", u);
+        showDashboard();
+      } else {
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+
+    // 🚪 ออกจากระบบ
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("username");
+      location.reload();
+    }
+
+    // 🧭 แสดงเฉพาะ Section ที่เลือก
+    function showSection(id) {
+      document.querySelectorAll(".content-section").forEach(s => s.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    // 🌐 แสดงหน้า Dashboard หลังล็อกอิน
+    function showDashboard() {
+      const loginBox = document.getElementById("loginBox");
+      const mainContent = document.getElementById("mainContent");
+      loginBox.style.display = "none";
+      mainContent.style.display = "block";
+      document.getElementById("displayUser").innerText = "👤 " + (localStorage.getItem("username") || "");
+    }
+
+    // 🧠 ตรวจสอบสถานะล็อกอินตอนโหลดหน้า
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("loggedIn") === "true") {
+        showDashboard();
+      }
+    });
+  </script>
+
+</body>
+</html>
